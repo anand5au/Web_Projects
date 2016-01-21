@@ -46,16 +46,17 @@ public class EditAnswer extends HttpServlet {
 	{
 		try
 	    {
-	        String url = "jdbc:mysql://localhost/cs320stu08";
+			Class.forName("com.mysql.jdbc.Driver");
+	        String url = "jdbc:mysql://localhost/stackoverflow";
 	        //Connection c = DriverManager.getConnection( url, "root","root" );
-	        Connection c = DriverManager.getConnection( url, "cs320stu08","3jy!Z#!w" );
+	        Connection c = DriverManager.getConnection( url, "stackoverflow","password" );
 	        PreparedStatement stmt = c.prepareStatement("update answers set answer=? where id=?");
 	        stmt.setString(1,request.getParameter("answer"));
 	        stmt.setInt(2,Integer.parseInt(request.getParameter("id")));
 	        stmt.execute();
 	        c.close();
 	    }
-	    catch( SQLException e )
+	    catch( Exception e )
 	    {
 	        throw new ServletException( e );
 	    }
@@ -63,9 +64,10 @@ public class EditAnswer extends HttpServlet {
 	    String sql = "select * from answers;";
 	    try
 	    {
-	        String url = "jdbc:mysql://localhost/cs320stu08";
+	    	Class.forName("com.mysql.jdbc.Driver");
+	        String url = "jdbc:mysql://localhost/stackoverflow";
 	        //Connection c = DriverManager.getConnection( url, "root","root" );
-	        Connection c = DriverManager.getConnection( url, "cs320stu08","3jy!Z#!w" );
+	        Connection c = DriverManager.getConnection( url, "stackoverflow","password" );
 	        Statement stmt = c.createStatement();
 	        ResultSet rs = stmt.executeQuery( sql );
 	        while( rs.next() )
@@ -74,7 +76,7 @@ public class EditAnswer extends HttpServlet {
 	        }
 	        c.close();
 	    }
-	    catch( SQLException e )
+	    catch( Exception e )
 	    {
 	        throw new ServletException( e );
 	    }

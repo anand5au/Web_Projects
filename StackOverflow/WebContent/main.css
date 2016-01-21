@@ -1,0 +1,78 @@
+.nav {
+  position: relative;
+}
+
+.nav a, .nav p {
+  color: #5a5a5a;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: 'Shift', sans-serif;
+  padding: 14px 10px;
+}
+
+.nav li {
+  display: inline-block;
+  text-align: center;
+}
+
+.nav ul {
+   position: relative;
+   top:0px;
+   bottom: 0px;
+}
+
+.jumbotron {
+  background-image:url('http://goo.gl/04j7Nn');
+  background-attachment: fixed;
+  height: 500px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.jumbotron .container {
+  position: relative;
+  top:100px;
+}
+
+.jumbotron h1 {
+  color: #fff;
+  font-size: 48px;  
+  font-family: 'Shift', sans-serif;
+  font-weight: bold;
+}
+
+.jumbotron p {
+  font-size: 20px;
+  color: #fff;
+}
+
+.neighborhood-guides {
+  background-color: #efefef;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.neighborhood-guides h2 {
+  color: #393c3d;
+  font-size: 24px;
+  font-family: 'Shift', sans-serif;
+  font-weight: bold;
+}
+
+.neighborhood-guides p {
+  font-size: 15px;
+  margin-bottom: 13px;
+}
+
+.learn-more {
+  background-color: #f7f7f7;
+}
+
+.learn-more h3 {
+  font-family: 'Shift', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.learn-more a {
+  color: #00b0ff;
+}

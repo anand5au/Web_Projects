@@ -51,9 +51,10 @@ public class AddQuestion extends HttpServlet {
 		formatter=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a");
         try
 	    {
-	        String url = "jdbc:mysql://localhost/cs320stu08";
+        	Class.forName("com.mysql.jdbc.Driver");
+	        String url = "jdbc:mysql://localhost/stackoverflow";
 	        //Connection c = DriverManager.getConnection( url, "root","root" );
-	        Connection c = DriverManager.getConnection( url, "cs320stu08","3jy!Z#!w" );
+	        Connection c = DriverManager.getConnection( url, "stackoverflow","password" );
 	        PreparedStatement stmt = c.prepareStatement("insert into questions values(?,?,?,?,?,?)");
 	        stmt.setInt(1,entries.size()+1);
 	        stmt.setString(2,request.getParameter("title"));
@@ -64,7 +65,7 @@ public class AddQuestion extends HttpServlet {
 	        stmt.execute();
 	        c.close();
 	    }
-	    catch( SQLException e )
+	    catch( Exception e )
 	    {
 	        throw new ServletException( e );
 	    }
@@ -72,9 +73,10 @@ public class AddQuestion extends HttpServlet {
         String sql = "select * from questions where id="+(entries.size()+1)+";";
 	    try
 	    {
-	        String url = "jdbc:mysql://localhost/cs320stu08";
+	    	Class.forName("com.mysql.jdbc.Driver");
+	        String url = "jdbc:mysql://localhost/stackoverflow";
 	        //Connection c = DriverManager.getConnection( url, "root","root" );
-	        Connection c = DriverManager.getConnection( url, "cs320stu08","3jy!Z#!w" );
+	        Connection c = DriverManager.getConnection( url, "stackoverflow","password" );
 	        Statement stmt = c.createStatement();
 	        ResultSet rs = stmt.executeQuery( sql );
 	        while( rs.next() )
@@ -90,7 +92,7 @@ public class AddQuestion extends HttpServlet {
 	        }
 	        c.close();
 	    }
-	    catch( SQLException e )
+	    catch( Exception e )
 	    {
 	        throw new ServletException( e );
 	    }

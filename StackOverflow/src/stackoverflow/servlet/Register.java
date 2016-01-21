@@ -39,16 +39,17 @@ public class Register extends HttpServlet {
     	String password=request.getParameter("password");
 		try
 	    {
-	        String url = "jdbc:mysql://localhost/cs320stu08";
+	    	Class.forName("com.mysql.jdbc.Driver");
+	        String url = "jdbc:mysql://localhost/stackoverflow";
 	        //Connection c = DriverManager.getConnection( url, "root","root" );
-	        Connection c = DriverManager.getConnection( url, "cs320stu08","3jy!Z#!w" );
+	        Connection c = DriverManager.getConnection( url, "stackoverflow","password" );
 	        PreparedStatement stmt = c.prepareStatement("insert into users values(?,?)");
 	        stmt.setString(1, username);
 	        stmt.setString(2, password);
 	        stmt.execute();
 	        c.close();
 	    }
-	    catch( SQLException e )
+	    catch( Exception e )
 	    {
 	        throw new ServletException( e );
 	    }

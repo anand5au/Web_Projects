@@ -35,9 +35,10 @@ public class QuestionDisplay extends HttpServlet {
 		List<AnswerList> ansentries = new ArrayList<AnswerList>();
 		try
 	    {
-	        String url = "jdbc:mysql://localhost/cs320stu08";
+	    	Class.forName("com.mysql.jdbc.Driver");
+	        String url = "jdbc:mysql://localhost/stackoverflow";
 	        //Connection c = DriverManager.getConnection( url, "root","root" );
-	        Connection c = DriverManager.getConnection( url, "cs320stu08","3jy!Z#!w" );
+	        Connection c = DriverManager.getConnection( url, "stackoverflow","password" );
 	        Statement stmt = c.createStatement();
 	        ResultSet rs = stmt.executeQuery("select * from answers");
 	        while(rs.next())
@@ -45,7 +46,7 @@ public class QuestionDisplay extends HttpServlet {
 	        	ansentries.add(new AnswerList(rs.getInt("id"),rs.getString("answer"), rs.getString("postedby"), rs.getString("posttime"), rs.getString("title"),rs.getInt("pvote"),rs.getInt("nvote"),rs.getString("accepted")));
 	        }
 	    }
-	    catch(SQLException e)
+	    catch(Exception e)
 	    {
 	    	throw new ServletException( e );
 	    }
@@ -69,9 +70,10 @@ public class QuestionDisplay extends HttpServlet {
 		formatter=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a");
 	    try
 	    {
-	        String url = "jdbc:mysql://localhost/cs320stu08";
+	    	Class.forName("com.mysql.jdbc.Driver");
+	        String url = "jdbc:mysql://localhost/stackoverflow";
 	        //Connection c = DriverManager.getConnection( url, "root","root" );
-	        Connection c = DriverManager.getConnection( url, "cs320stu08","3jy!Z#!w" );
+	        Connection c = DriverManager.getConnection( url, "stackoverflow","password" );
 	        PreparedStatement stmt = c.prepareStatement("insert into answers values(?,?,?,?,?,?,?,?)");
 	        stmt.setInt(1,ansentries.size()+1);
 	        stmt.setString(2,request.getParameter("anstitle"));
@@ -84,16 +86,17 @@ public class QuestionDisplay extends HttpServlet {
 	        stmt.execute();
 	        c.close();
 	    }
-	    catch( SQLException e )
+	    catch( Exception e )
 	    {
 	        throw new ServletException( e );
 	    }
 	    ansentries = new ArrayList<AnswerList>();
 		try
 	    {
-	        String url = "jdbc:mysql://localhost/cs320stu08";
+	    	Class.forName("com.mysql.jdbc.Driver");
+	        String url = "jdbc:mysql://localhost/stackoverflow";
 	        //Connection c = DriverManager.getConnection( url, "root","root" );
-	        Connection c = DriverManager.getConnection( url, "cs320stu08","3jy!Z#!w" );
+	        Connection c = DriverManager.getConnection( url, "stackoverflow","password" );
 	        Statement stmt = c.createStatement();
 	        ResultSet rs = stmt.executeQuery("select * from answers");
 	        while(rs.next())
@@ -101,7 +104,7 @@ public class QuestionDisplay extends HttpServlet {
 	        	ansentries.add(new AnswerList(rs.getInt("id"),rs.getString("answer"), rs.getString("postedby"), rs.getString("posttime"), rs.getString("title"),rs.getInt("pvote"),rs.getInt("nvote"),rs.getString("accepted")));
 	        }
 	    }
-	    catch(SQLException e)
+	    catch(Exception e)
 	    {
 	    	throw new ServletException( e );
 	    }
