@@ -2,8 +2,16 @@
   position: relative;
 }
 
-.nav a, .nav p {
-  color: #5a5a5a;
+.nav a {
+  color: #f95;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: 'Shift', sans-serif;
+  padding: 14px 10px;
+}
+
+.nav span {
+  color: green;
   font-size: 18px;
   font-weight: bold;
   font-family: 'Shift', sans-serif;
@@ -22,16 +30,22 @@
 }
 
 .jumbotron {
-  background-image:url('http://goo.gl/04j7Nn');
+  background-image:url(images/bg2.jpg);
   background-attachment: fixed;
-  height: 500px;
+  height: 800px;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-.jumbotron .container {
-  position: relative;
-  top:100px;
+.container {
+	font-family: 'Shift', sans-serif;
+	font-size: 15px;
+	text-align: center;
+}
+
+.heading {
+	font-weight: bold;
+	font-size: 18px;
 }
 
 .jumbotron h1 {
@@ -75,4 +89,24 @@
 
 .learn-more a {
   color: #00b0ff;
+}
+
+input[type=text], textarea, input[type=password] {
+    padding:5px; 
+    border:2px solid #ccc; 
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+input[type=text]:focus, input[type=password]:focus, textarea:focus {
+    border-color:orange;
+}
+
+input[type=submit] {
+    padding:5px 15px; 
+    background:#ddd; 
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
 }

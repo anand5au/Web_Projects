@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="main.css">
 </head>
 <body>
+<div class="jumbotron">
 	<div class="nav">
 		<div class="container">
 			<ul class="pull-left">
@@ -25,39 +26,43 @@
 
 			</ul>
 			<map name="logomap">
-				<area shape="default" href="QuestionList.html" alt="">
+				<area shape="default" href="QuestionList" alt="">
 			</map>
 			<ul class="pull-right">
 				<c:if test="${empty user}">
-					<li><a style='float: right;' href='Register'>Register</a></li>
+				<li><a style='float: right;' href='login'>Login</a></li>
+					<li><a style='float: right;' href='Register'>New User?</a></li>
 				</c:if>
 				<c:if test="${not empty user}">
-					<li><p style='float: right;'>Hi ${user.username}</p></li>
+					<li><span style='float: right;'>Hi ${user.username}</span></li>
 					<li><a style='float: right;' href='logout'>Logout</a></li>
 				</c:if>
 			</ul>
 		</div>
 	</div>
 
-	<br />
-	<table border="1" width='500' align="center">
-		<caption>Tag Statistics</caption>
-		<tr>
-			<th>Tag</th>
-			<th>Count</th>
-		</tr>
+	<div class="container">
+		<div class="heading">
+		<div class="row">
+			<div class="col-md-4">Tag</div>
+			<div class="col-md-4">Count</div>
+		</div>
+		</div>
+		<br/>
 		<c:forEach var="entry" items="${tagStat}" varStatus="status">
-			<tr>
-				<td>${entry.key}</td>
-				<td>${entry.value}</td>
-			</tr>
+			<div class="row">
+				<div class="col-md-4">${entry.key}</div>
+				<div class="col-md-4">${entry.value}</div>
+			</div>
+			<br/>
 		</c:forEach>
-	</table>
+	</div>
 	<div class="nav">
 		<ul>
 			<li><a href='QuestionList'
 				style='float: left; margin-left: 150px'>Back to Questions</a></li>
 		</ul>
+	</div>
 	</div>
 </body>
 </html>

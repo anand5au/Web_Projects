@@ -17,157 +17,196 @@
 <link rel="stylesheet" href="main.css">
 </head>
 <body>
-	<div class="nav">
-		<div class="container">
-			<ul class="pull-left">
-				<li><img src="images/logo.png"
-					style="float: left; width: 45%; height: 45%" usemap="#logomap" /></li>
-			</ul>
-			<map name="logomap">
-				<area shape="default" href="QuestionList.html" alt="">
-			</map>
-			<ul class="pull-right">
-				<c:if test="${empty user}">
-					<li><a style='float: right;' href='Register'>Register</a></li>
-				</c:if>
-				<c:if test="${not empty user}">
-					<li><p style='float: right;'>Hi ${user.username}</p></li>
-					<li><a style='float: right;' href='logout'>Logout</a></li>
-				</c:if>
-			</ul>
-		</div>
-	</div>
-	<c:forEach items="${entries}" var="entry">
-		<a href='QuestionList' style='text-align: left;'
-			id="${entry.questionNumber}">Back to Questions</a>
-		<br />
-		<c:if test="not empty ${users}">
-			<a style='text-align: left;' href='logout'>Logout</a>
-			<br />
-		</c:if>
-		<c:if test="${user.username == entry.postedby}">
-			<a style='text-align: left;'
-				href='EditQuestion?id=${entry.questionNumber}'>Edit Question</a>
-			<br />
-		</c:if>
-		<table border='1' width='800'>
-			<caption>
-				StackOverFlow - ${entry.title}<br />
-			</caption>
-			<tr>
-				<td style='text-align: right;'>Posted by ${entry.postedby} at
-					${entry.posttime}</td>
-			</tr>
-			<tr>
-				<td style='text-align: left;'>${entry.question}</td>
-			</tr>
-		</table>
-		<c:if test="${not empty ansentries}">
-			<c:forEach items="${ansentries}" var="ansentry">
-				<c:if test="${ansentry.title == entry.title}">
-					<br />
-					<b>Answers:</b>
-					<br />
-					<c:if test="${ansentry.posted == user.username}">
-
-						<a style='text-align: left;'
-							href='EditAnswer?aid=${ansentry.answerId}&atitle=${ansentry.title}'>Edit
-							Answer</a>
-						<c:if test='${ansentry.accepted == "no"}'>
-				 | <a
-								href='ChangeAnswerState?aid=${ansentry.answerId}&atitle=${ansentry.title}'>Mark
-								Accepted</a>
-						</c:if>
+	<div class="jumbotron" style="height: 8000px">
+		<div class="nav">
+			<div class="container">
+				<ul class="pull-left">
+					<li><img src="images/logo.png"
+						style="float: left; width: 45%; height: 45%" usemap="#logomap" /></li>
+				</ul>
+				<map name="logomap">
+					<area shape="default" href="QuestionList" alt="">
+				</map>
+				<ul class="pull-right">
+					<c:if test="${empty user}">
+						<li><a style='float: right;' href='login'>Login</a></li>
+						<li><a style='float: right;' href='Register'>New User?</a></li>
 					</c:if>
-					<br />
-					<table border='1' width='800'>
-						<c:if test='${ansentry.accepted=="yes"}'>
-							<tr>
-								<td style="color: green; text-align: center;"><b>Accepted
-										Answer</b></td>
-							</tr>
-						</c:if>
-						<tr>
-							<td style="text-align: right;">Posted by ${ansentry.posted}
-								at ${ansentry.posttime}</td>
-						</tr>
-						<tr>
-							<td>${ansentry.answer}</td>
-						</tr>
-						<tr>
-							<td>Positive Votes : ${ansentry.positiveVoteCount}</td>
-						</tr>
-						<tr>
-							<td>Negative Votes : ${ansentry.negativeVoteCount}</td>
-						</tr>
-						<c:if test="not empty ${users}">
-							<c:if test="${ansentry.posted!=user.username}">
-								<tr>
-									<td><a
-										href='VoteServlet?vtype=positive&answerId=${ansentry.answerId}'
-										style='color: green;'>Vote Positive</a></td>
-								</tr>
-								<tr>
-									<td><a
-										href='VoteServlet?vtype=negative&answerId=${ansentry.answerId}'
-										style='color: red;'>Vote Negative</a></td>
-								</tr>
+					<c:if test="${not empty user}">
+						<li><span style='float: right;'>Hi ${user.username}</span></li>
+						<li><a style='float: right;' href='logout'>Logout</a></li>
+					</c:if>
+				</ul>
+			</div>
+		</div>
+
+		<c:forEach items="${entries}" var="entry">
+			<div class="nav">
+				<ul class="pull-left">
+					<li><a style='float: left; margin-left: 150px'
+						href='QuestionList' id="${entry.questionNumber}">Back to
+							Questions</a></li>
+
+					<c:if test="${user.username == entry.postedby}">
+						<li><a style='float: left; margin-left: 150px'
+							href='EditQuestion?id=${entry.questionNumber}'>Edit Question</a></li>
+					</c:if>
+				</ul>
+			</div>
+
+			<div class="container">
+				<div class="heading">
+					<div class="row">
+						<div class="col-md-8">TechHelp - ${entry.title}</div>
+					</div>
+				</div>
+				<br />
+				<div class="row">
+					<div class="col-md-8">
+						<span style="text-align: center;">${entry.question}</span>
+					</div>
+				</div>
+				<br />
+				<div class="row">
+					<div class="col-md-8">
+						<span style="text-align: center; font-style: italic;">Posted
+							by ${entry.postedby} at ${entry.posttime}</span>
+					</div>
+				</div>
+				<br />
+			</div>
+			
+			<c:if test="${not empty ansentries}">
+			<div class="container">
+			<div class="row">
+			<div class="col-md-8" style="font-weight: bold; font-size: 18px">Answers:</div>
+			</div></div>
+				<c:forEach items="${ansentries}" var="ansentry">
+				<div class="container">
+					<c:if test="${ansentry.title == entry.title}">
+						<c:if test="${ansentry.posted == user.username}">
+						<div class="nav">
+						<div class="row">
+						<div class="col-md-4" >
+							<a style='text-align: center;font-size: 12px' href='EditAnswer?aid=${ansentry.answerId}&atitle=${ansentry.title}'>Edit
+								Answer</a></div>
+							<c:if test='${ansentry.accepted == "no"}'>
+				 			<div class="col-md-4" style='text-align: center;font-size: 12px'><a style='text-align: center;font-size: 12px'
+									href='ChangeAnswerState?aid=${ansentry.answerId}&atitle=${ansentry.title}'>Mark
+									Accepted</a></div>
 							</c:if>
+							</div>
+							</div>
 						</c:if>
-					</table>
-				</c:if>
-			</c:forEach>
-		</c:if>
-		<c:if test="${not empty users}">
+						<div class="row">
+						<div class="col-md-4">
+							<c:if test='${ansentry.accepted=="yes"}'>
+									 <span style="color: green; text-align: center;">Accepted
+											Answer</span>
+							</c:if>
+							</div>
+								<div class="col-md-4" >Posted by ${ansentry.posted}
+									at ${ansentry.posttime}</div>
+						</div>
+						<br/>
+							<div class="row">
+								<div class="col-md-8">${ansentry.answer}</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4">Positive Votes : ${ansentry.positiveVoteCount}</div>
+								<div class="col-md-4">Negative Votes : ${ansentry.negativeVoteCount}</div>
+							</div>
+							<br/>
+							<c:if test="not empty ${users}">
+								<c:if test="${ansentry.posted!=user.username}">
+									<div class="row">
+										<div class="col-md-4"><a
+											href='VoteServlet?vtype=positive&answerId=${ansentry.answerId}'
+											style='color: green;'>Vote Positive</a></div>
+										<div class="col-md-4"><a
+											href='VoteServlet?vtype=negative&answerId=${ansentry.answerId}'
+											style='color: red;'>Vote Negative</a></div>
+									</div>
+								</c:if>
+							</c:if>
+					</c:if>
+					</div>
+					<br/>
+				</c:forEach>
+			</c:if>
+
+			<c:if test="${not empty users}">
+				<br />
+				<form action='QuestionDisplay' method='post'>
+					<input type='hidden' name='anstitle' value="${entry.title}" />
+					<div class="container">
+						<div class="row">
+							<div class="col-md-4" style="font-weight: bold">Submit an
+								Answer:</div>
+						</div>
+						<br />
+						<div class="row">
+							<div class="col-md-4">
+								<input type='hidden' name='postby' value="${user.username}" />
+							</div>
+						</div>
+						<br />
+						<div class="row">
+							<div class="col-md-2">Your Answer:</div>
+							<div class="col-md-2">
+								<textarea style="float: left; margin-left: 0px;" name='answer'
+									rows='5' cols='30'></textarea>
+							</div>
+						</div>
+						<br />
+						<div class="row">
+							<div class="col-md-2"></div>
+							<div class="col-md-2">
+								<input type='submit' value='Submit' name='submit' />
+							</div>
+						</div>
+					</div>
+				</form>
+			</c:if>
+
 			<br />
-			<b>Submit an Answer:</b>
-			<form action='QuestionDisplay' method='post'>
-				<input type='hidden' name='anstitle' value="${entry.title}" />
-				<table border='1' width='800'>
-					<tr>
-						<td><input type='hidden' name='postby'
-							value="${user.username}" /></td>
-					</tr>
-					<tr>
-						<td>Your Answer:</td>
-						<td><textarea name='answer' rows='5' cols='60'></textarea></td>
-					</tr>
-					<tr>
-						<td><input type='submit' value='Submit' name='submit' /></td>
-					</tr>
-				</table>
-			</form>
-		</c:if>
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-	</c:forEach>
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+		</c:forEach>
+	</div>
 </body>
 </html>

@@ -15,54 +15,62 @@
 
 <link rel="stylesheet" href="main.css">
 <title>Question List</title>
+<link rel="icon" type="image/png" href="images/logo1.png" />
 </head>
 <body>
-	<div class="nav">
+	<div class="jumbotron">
+		<div class="nav">
+			<div class="container">
+				<ul class="pull-left">
+					<li><a><img src="images/logo.png"
+						style="float: left; width: 45%; height: 45%" usemap="#logomap" /></a></li>
+				</ul>
+				<map name="logomap">
+					<area shape="default" href="QuestionList" alt="">
+				</map>
+				<ul class="pull-right">
+					<c:if test="${empty user}">
+						<li><a style='float: right;' href='login'>Login</a></li>
+						<li><a style='float: right;' href='Register'>New User?</a></li>
+					</c:if>
+					<c:if test="${not empty user}">
+						<li><span style='float: right;'>Hi ${user.username}</span></li>
+						<li><a style='float: right;' href='logout'>Logout</a></li>
+					</c:if>
+				</ul>
+			</div>
+		</div>
+
 		<div class="container">
-			<ul class="pull-left">
-				<li><img src="images/logo.png"
-					style="float: left; width: 45%; height: 45%" usemap="#logomap" /></li>
-			</ul>
-			<map name="logomap">
-				<area shape="default" href="QuestionList.html" alt="">
-			</map>
-			<ul class="pull-right">
-				<c:if test="${empty user}">
-					<li><a style='float: right;' href='Register'>Register</a></li>
-				</c:if>
-				<c:if test="${not empty user}">
-					<li><p style='float: right;'>Hi ${user.username}</p></li>
-					<li><a style='float: right;' href='logout'>Logout</a></li>
-				</c:if>
+		<div class="heading">
+		<div class="row">
+				<div class="col-md-3">Question</div>
+				<div class="col-md-3">PostedBy</div>
+				<div class="col-md-3">PostedDate</div>
+				<div class="col-md-3">Tags</div>
+		</div>
+		</div>
+		<br/>
+			<c:forEach items="${entries}" var="entry">
+				<div class="row">
+					<div class="col-md-3"><a href="QuestionDisplay#${entry.questionNumber}">${entry.title}</a></div>
+					<div class="col-md-3">${entry.postedby}</div>
+					<div class="col-md-3">${entry.posttime}</div>
+					<div class="col-md-3"><c:forEach items="${entry.tagList}" var="tag">
+							<a href="HandleTag?tagName=${tag}">${tag}</a>
+						</c:forEach></div>
+				</div>
+				<br/>
+			</c:forEach>
+		</div>
+		<div class="nav">
+			<ul>
+				<li><a style='float: left; margin-left: 150px'
+					href='AddQuestion'>Post a Question</a></li>
+				<li><a style='float: left; margin-left: 30px'
+					href="TagPage.jsp">Tag Statistics</a></li>
 			</ul>
 		</div>
-	</div>
-
-	<table border="1">
-		<tr>
-			<th>Question</th>
-			<th>PostedBy</th>
-			<th>PostedDate</th>
-			<th>Tags</th>
-		</tr>
-		<c:forEach items="${entries}" var="entry">
-			<tr>
-				<td><a href="QuestionDisplay#${entry.questionNumber}">${entry.title}</a></td>
-				<td>${entry.postedby}</td>
-				<td>${entry.posttime}</td>
-				<td><c:forEach items="${entry.tagList}" var="tag">
-						<a href="HandleTag?tagName=${tag}">${tag}</a>
-					</c:forEach></td>
-			</tr>
-		</c:forEach>
-	</table>
-	<div class="nav">
-		<ul>
-			<li><a style='float: left;margin-left: 150px' href='AddQuestion'>Post a
-					Question</a></li>
-			<li><a style='float: left;margin-left: 30px' href="TagPage.jsp">Tag
-					Statistics</a></li>
-		</ul>
 	</div>
 </body>
 </html>

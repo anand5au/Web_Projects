@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="main.css">
 </head>
 <body>
+<div class="jumbotron">
 	<div class="nav">
 		<div class="container">
 			<ul class="pull-left">
@@ -24,46 +25,50 @@
 					style="float: left; width: 45%; height: 45%" usemap="#logomap" /></li>
 			</ul>
 			<map name="logomap">
-				<area shape="default" href="QuestionList.html" alt="">
+				<area shape="default" href="QuestionList" alt="">
 			</map>
 			<ul class="pull-right">
 				<c:if test="${empty user}">
-					<li><a style='float: right;' href='Register'>Register</a></li>
+				<li><a style='float: right;' href='login'>Login</a></li>
+					<li><a style='float: right;' href='Register'>New User?</a></li>
 				</c:if>
 				<c:if test="${not empty user}">
-					<li><p style='float: right;'>Hi ${user.username}</p></li>
+					<li><span style='float: right;'>Hi ${user.username}</span></li>
 					<li><a style='float: right;' href='logout'>Logout</a></li>
 				</c:if>
 			</ul>
 		</div>
 	</div>
+	
 	<form action='EditQuestion' method='post'>
-		<table>
-			<tr>
-				<td>Question Title:</td>
-				<td><input type='text' name='title' value="${editentry.title}"></td>
-			</tr>
-			<tr>
-				<td>Question:</td>
-				<td><textarea name='question' rows='5' cols='60'>${editentry.question}</textarea></td>
-			</tr>
-			<tr>
-				<td><input type='hidden' name='postedby'
-					value='${user.username}' /></td>
-			</tr>
-			<tr>
-				<td><input type='hidden' name='qno'
-					value='${editentry.questionNumber}' /></td>
-			</tr>
-			<tr>
-				<td>Tags:</td>
-				<td><input type='text' name='tag' value="${tags}"></td>
-			</tr>
-			<tr>
-				<td colspan='2'><input type='submit' name='submit'
-					value='Post Question' /></td>
-			</tr>
-		</table>
+	<div class="container">
+		<div class="row">
+				<div class="col-md-4" style="font-weight: bold">Question Title:</div>
+				<div class="col-md-4"><input style="float: left; margin-left: 0px;" type='text' name='title' value="${editentry.title}"></div>
+			</div><br/>
+			<div class="row">
+				<div class="col-md-4" style="font-weight: bold">Question:</div>
+				<div class="col-md-4"><textarea style="float: left; margin-left: 0px;" name='question' rows='5' cols='60'>${editentry.question}</textarea></div>
+			</div><br/>
+			<div class="row">
+				<div class="col-md-4"><input type='hidden' name='postedby'
+					value='${user.username}' /></div>
+			</div>
+			<div class="row">
+				<div class="col-md-4"><input type='hidden' name='qno'
+					value='${editentry.questionNumber}' /></div>
+			</div><br/>
+			<div class="row">
+				<div class="col-md-4" style="font-weight: bold">Tags:</div>
+				<div class="col-md-4"><input style="float: left; margin-left: 0px;" type='text' name='tag' value="${tags}"></div>
+			</div><br/>
+			<div class="row">
+			<div class="col-md-4"></div>
+				<div class="col-md-4"><input style="float: left; margin-left: 0px;" type='submit' name='submit'
+					value='Post Question' /></div>
+			</div><br/>
+		</div>
 	</form>
+	</div>
 </body>
 </html>

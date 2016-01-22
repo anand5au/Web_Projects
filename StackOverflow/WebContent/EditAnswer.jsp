@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="main.css">
 </head>
 <body>
+<div class="jumbotron">
 	<div class="nav">
 		<div class="container">
 			<ul class="pull-left">
@@ -24,37 +25,44 @@
 					style="float: left; width: 45%; height: 45%" usemap="#logomap" /></li>
 			</ul>
 			<map name="logomap">
-				<area shape="default" href="QuestionList.html" alt="">
+				<area shape="default" href="QuestionList" alt="">
 			</map>
 			<ul class="pull-right">
 				<c:if test="${empty user}">
-					<li><a style='float: right;' href='Register'>Register</a></li>
+				<li><a style='float: right;' href='login'>Login</a></li>
+					<li><a style='float: right;' href='Register'>New User?</a></li>
 				</c:if>
 				<c:if test="${not empty user}">
-					<li><p style='float: right;'>Hi ${user.username}</p></li>
+					<li><span style='float: right;'>Hi ${user.username}</span></li>
 					<li><a style='float: right;' href='logout'>Logout</a></li>
 				</c:if>
 			</ul>
 		</div>
 	</div>
 	<form action='EditAnswer' method='post'>
-		<table border='1' width='800'>
-			<caption>Question Title : ${editansentry.title}</caption>
-			<tr>
-				<td><input type='hidden' name='postby' value="${user.username}" /></td>
-			</tr>
-			<tr>
-				<td><input type='hidden' name='id'
-					value="${editansentry.answerId}" /></td>
-			</tr>
-			<tr>
-				<td>Your Answer:</td>
-				<td><textarea name='answer' rows='5' cols='60'>${editansentry.answer}</textarea></td>
-			</tr>
-			<tr>
-				<td><input type='submit' value='Submit' name='submit' /></td>
-			</tr>
-		</table>
+		<div class="container">
+		<div class="heading">
+		<div class="row">
+			<div class="col-md-4">Question Title : ${editansentry.title}</div>
+			</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4"><input type='hidden' name='postby' value="${user.username}" /></div>
+			</div><br/>
+			<div class="row">
+				<div class="col-md-4"><input type='hidden' name='id'
+					value="${editansentry.answerId}" /></div>
+			</div><br/>
+			<div class="row">
+				<div class="col-md-4" style="font-weight: bold">Your Answer:</div>
+				<div class="col-md-4"><textarea style="float: left; margin-left: 0px;" name='answer' rows='5' cols='60'>${editansentry.answer}</textarea></div>
+			</div><br/>
+			<div class="row">
+				<div class="col-md-4"></div>
+				<div class="col-md-4"><input style="float: left; margin-left: 0px;" type='submit' value='Submit' name='submit' /></div>
+			</div><br/>
+		</div>
 	</form>
+	</div>
 </body>
 </html>
